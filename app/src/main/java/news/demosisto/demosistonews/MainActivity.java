@@ -1,6 +1,8 @@
 package news.demosisto.demosistonews;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,35 +10,67 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private EditText txtEdit;
+    public SharedPreferences dataSet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        txtEdit = (EditText) findViewById(R.id.txtSearch);
+        dataSet = getSharedPreferences(getString(R.string.pref_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor dataSetEditor = dataSet.edit();
+        dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url));
+        dataSetEditor.commit();
+        Log.v("pref_first_push",dataSet.getString(getString(R.string.pref_str),"Error!"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         if (savedInstanceState == null) {
 
             addRssFragment();
         }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Refreshing......", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Fetching......", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
-                addRssFragment();
+                String forCompare = txtEdit.getText().toString();
+                forCompare.trim();
+                txtEdit.setText(forCompare);
+                SharedPreferences.Editor dataSetEditor = dataSet.edit();
+                if(forCompare != "" || forCompare != null){
+                    dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url)
+                            +getString(R.string.feed_header) + forCompare);
+                    dataSetEditor.commit();
+                    addRssFragment();
+                }else{
+                    dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url));
+                    dataSetEditor.commit();
+                }
+                txtEdit.setText("");
+                InputMethodManager ime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                ime.hideSoftInputFromWindow(view.getWindowToken(),0);
             }
         });
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private void addRssFragment() {
@@ -47,15 +81,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private void rmRssFragment() {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        RssFragment fragment = new RssFragment();
-        if(fragment != null){
-            transaction.remove(fragment);
-        }
-        transaction.commit();
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

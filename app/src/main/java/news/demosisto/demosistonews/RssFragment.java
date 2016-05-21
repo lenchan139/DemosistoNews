@@ -65,6 +65,7 @@ public class RssFragment extends Fragment implements OnItemClickListener {
 			List<RssItem> items = (List<RssItem>) resultData.getSerializable(RssService.ITEMS);
 			items.remove(0);
 			items.remove(0);
+
 			if (items != null) {
 				RssAdapter adapter = new RssAdapter(getActivity(), items);
 				listView.setAdapter(adapter);

@@ -10,14 +10,14 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 
 public class RssService extends IntentService {
-
-	private static final String RSS_LINK= "https://demosisto.news/feed/";
+    private SharedPreferences pref;
 	public static final String ITEMS = "items";
 	public static final String RECEIVER = "receiver";
 
@@ -29,9 +29,13 @@ public class RssService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		Log.d(Constants.TAG, "Service started");
 		List<RssItem> rssItems = null;
+        pref =  getSharedPreferences(getString(R.string.pref_key),1);
+        //String x = pref.getAll();
+        Log.v("pref_before_lastPush", pref.getString(getString(R.string.pref_str),"Error!"));
+		String RSS_LINK = pref.getString(getString(R.string.pref_str),"Error!");
 		try {
 			PcWorldRssParser parser = new PcWorldRssParser();
-			rssItems = parser.parse(getInputStream(getResources().getString(R.string.url)));
+			rssItems = parser.parse(getInputStream(RSS_LINK));
 		} catch (XmlPullParserException e) {
 			Log.w(e.getMessage(), e);
 		} catch (IOException e) {
