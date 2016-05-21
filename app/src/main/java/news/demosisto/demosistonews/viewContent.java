@@ -26,10 +26,10 @@ public class viewContent extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         url = getIntent().getStringExtra("uriHere");
         uri = Uri.parse(url);
-        url = "https://googleweblight.com/?lite_url=" + url;
+        String uriPushing = "http://readability.com/m?url=" + url;
         webView = (WebView) findViewById(R.id.webviewX);
         //webView = new WebView(this);
-        webView.loadUrl(url);
+        webView.loadUrl(uriPushing);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new wvcHelper(){
