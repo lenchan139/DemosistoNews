@@ -63,6 +63,8 @@ public class RssFragment extends Fragment implements OnItemClickListener {
 		protected void onReceiveResult(int resultCode, Bundle resultData) {
 			progressBar.setVisibility(View.GONE);
 			List<RssItem> items = (List<RssItem>) resultData.getSerializable(RssService.ITEMS);
+			items.remove(0);
+			items.remove(0);
 			if (items != null) {
 				RssAdapter adapter = new RssAdapter(getActivity(), items);
 				listView.setAdapter(adapter);
@@ -70,7 +72,9 @@ public class RssFragment extends Fragment implements OnItemClickListener {
 				Toast.makeText(getActivity(), "An error occured while downloading the rss feed.",
 						Toast.LENGTH_LONG).show();
 			}
+		//	listView.removeViewAt(0);
 		};
+
 	};
 
 	@Override
