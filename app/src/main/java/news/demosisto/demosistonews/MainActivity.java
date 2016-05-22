@@ -55,14 +55,15 @@ public class MainActivity extends AppCompatActivity {
                 forCompare.trim();
                 txtEdit.setText(forCompare);
                 SharedPreferences.Editor dataSetEditor = dataSet.edit();
-                if(forCompare != "" || forCompare != null){
+                if(forCompare.indexOf("=") >= 0){
+                    dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url) + "/?" + forCompare);
+                    dataSetEditor.commit();
+                    addRssFragment();
+                }else{
                     dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url)
                             +getString(R.string.feed_header) + forCompare);
                     dataSetEditor.commit();
                     addRssFragment();
-                }else{
-                    dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url));
-                    dataSetEditor.commit();
                 }
                 txtEdit.setText("");
                 InputMethodManager ime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
