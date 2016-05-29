@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         txtEdit = (EditText) findViewById(R.id.txtSearch);
         dataSet = getSharedPreferences(getString(R.string.pref_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor dataSetEditor = dataSet.edit();
-        dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url));
+        dataSetEditor.putString(getString(R.string.pref_str),getResources().getString(R.string.url) + "/feed/");
         dataSetEditor.commit();
         Log.v("pref_first_push",dataSet.getString(getString(R.string.pref_str),"Error!"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.v("catId_Before_Converted", "catId: " + catId);
         if(catId == "none") {
+            srcURL = srcURL + "/feed";
         }else{
             srcURL = srcURL + "/category/" + catId + "/feed";
         }

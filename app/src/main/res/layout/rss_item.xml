@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="5sp"
+    android:paddingBottom="5sp">
 <TextView
     android:id="@+id/itemTitle"
     android:textSize="22dp"
@@ -11,6 +13,6 @@
     <TextView
         android:id="@+id/itemContent"
         android:textSize="15dp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="0sp"/>
 </LinearLayout>
