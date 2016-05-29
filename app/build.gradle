@@ -7,8 +7,8 @@ android {
         applicationId "news.demosisto.demosistonews"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 4
-        versionName '4 BETA'
+        versionCode 5
+        versionName '5 BETA'
     }
     buildTypes {
         release {
