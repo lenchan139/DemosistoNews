@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtEdit;
     public SharedPreferences dataSet;
     private Spinner catSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,23 +57,41 @@ public class MainActivity extends AppCompatActivity {
             addRssFragment();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onSearch(view);
+            }
+        });
 
-                Snackbar.make(view, "Fetching......", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                doSearch();
-
-                InputMethodManager ime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                ime.hideSoftInputFromWindow(view.getWindowToken(),0);
+        //onClick Enter Listener
+        txtEdit.setOnKeyListener(new View.OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            onSearch(v);
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
             }
         });
 
 
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+
+
 
     private void addRssFragment() {
         FragmentManager manager = getSupportFragmentManager();
@@ -103,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
             return true;
         }
 
@@ -161,5 +184,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void onSearch(View view){
+
+        Snackbar.make(view, "喺伺服器搬運緊啲資料落嚟架啦。", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+        doSearch();
+
+        InputMethodManager ime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        ime.hideSoftInputFromWindow(view.getWindowToken(),0);
     }
 }

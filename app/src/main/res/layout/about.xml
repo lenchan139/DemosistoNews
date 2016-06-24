@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".About">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="?attr/actionBarSize">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:layout_gravity="center"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="永遠都喺測試版"/>
+            </LinearLayout>
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="呢個App係咩？"
+            android:textSize="24dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\n呢個App喺由德模士多報嘅唯一管理員耗資一文港紙，消耗大量(?)嘅時間所研發，喺爲咗毒者可以更方便咁讀文章咁樣樣。"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\n咁咩喺德模士多報？"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\n    Demo解作模範（英文），si解作死（日文），sto解作檯（波西尼亞文），合埋……我點知點解咩，屌。
+\n\n    Demosisto News可能喺全宇宙最細規模嘅傳媒。Ummm……講喺傳媒，其實我哋淨喺會抄新聞，簡化佢，就喺一篇架啦。
+\n\n    我哋主要喺根據編輯個人喜好，鳩推啲文章出嚟，啱睇希望可以繼續捧場，唔啱睇嘅可以向Admin投訴（你知Admin喺邊個嘅話）。
+\n\n    Demosisto News嘗試將文章概括出嚟，提供一個良好嘅閱（吞）讀（文）體驗，亦希望可以被各位都市人可以讀少/讀短啲啲文章（尤其喺啲無養分嘅垃圾低層次抄報），多啲時間打飛機、同女朋友玩雙頭龍、打PS4之類。
+\n\n    同時，爲推廣粵語，締造最強大嘅粵語帝國，我哋承諾99.99%嘅文章會用粵語輸入，務求樣識同唔識嘅人都……Hummmm……總之係咪都要識啦，唔識嘅返鄉下好嗎？
+\n\n    啊，提下大家，Admin喺一個愛國愛港嘅港獨好青年，所以喺新聞上面會平衡左右（啫喺鳩推）立場，即是文匯大公HKG垃圾抄報日月西方小日本媒體，只要「有趣（interesting）」嘅就會出。
+\n\n\n\n\n\n"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AAA"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_menu_manage" />
+
+</android.support.design.widget.CoordinatorLayout>
