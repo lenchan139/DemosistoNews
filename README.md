@@ -1,2 +1,2 @@
 # DemosistoNews
-x
+Reference: https://github.com/vgrec/SimpleRssReader
